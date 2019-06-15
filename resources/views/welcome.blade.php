@@ -1,90 +1,74 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.base')
 
-        <title>Laravel</title>
+@section('title') MiniPort - Start SHopping Now @endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('styles')
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    <style>
+        .has-error{
+            border-color: #dd4b39;
+        }
+    </style>
 
-            .full-height {
-                height: 100vh;
-            }
+@endsection
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+@section('content')
 
-            .position-ref {
-                position: relative;
-            }
+    <!-- Header -->
+    <header class="header header-inverse bg-fixed" style="background-image: url(user/assets/img/bg-gift.jpg)" data-overlay="8">
+        <div class="container text-center">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
 
-            .content {
-                text-align: center;
-            }
+                    <h1>The Store</h1>
+                    <p class="fs-20 opacity-70">You can find a list of our product in this page. We'll deliver your order in less than two days. Try it yourself!</p>
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/dashboard') }}">Dashboard</a>
-                        <a href="{{ url('/plan') }}">Plan</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Umaiza - {{Carbon\Carbon::parse(now())->diffInDays()}}
-                </div>
-
-                
             </div>
+
         </div>
-    </body>
-</html>
+    </header>
+    <!-- END Header -->
+
+    <section class="section">
+        <div class="container">
+
+            <div class="row gap-y">
+
+
+                @forelse($products as $product)
+
+                    <div class="col-12 col-md-6 col-xl-4">
+
+                        <div class="shop-item" >
+                            <div class="item-details">
+                                <div>
+                                    <h5>{{$product->name}}</h5>
+                                    <p>{{$product->category->name}}</p>
+                                </div>
+
+                                <div class="item-price"><span class="unit">N</span>{{$product->price}}</div>
+                            </div>
+                            <a href="{{route('single', $product->slug)}}">
+                                <img src="assets/img/product-1.png" alt="product">
+                            </a>
+
+                            <add-to-cart product_id = "{{$product->id}}"></add-to-cart>
+
+                        </div>
+
+                    </div>
+
+                @empty
+
+                    <h5>No Products In Store</h5>
+
+                @endforelse
+
+            </div>
+
+        </div>
+    </section>
+
+@endsection

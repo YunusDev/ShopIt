@@ -1,32 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-
-});
-
-
-
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['namespace'=>'User', 'middleware' => 'verified'], function() {
+Route::get('/test', 'HomeController@test');
 
+Route::group(['namespace'=>'User'], function() {
 
+    Route::get('/product/{slug}', 'ProductController@show')->name('single');
 
+    Route::get('/cart', 'ProductController@cart')->name('cart');
+
+    Route::post('/product', 'ProductController@addToCart')->name('addToCart');
+
+    Route::post('/edit/cart', 'ProductController@updateItemCart')->name('editToCart');
+
+    Route::post('/remove/product/cart', 'ProductController@deleteItemCart')->name('remToCart');
 
 });
 
@@ -36,21 +27,28 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
 
     Route::post('/login', 'Auth\LoginController@login');
 
-    Route::post('/logout',  'Auth\LoginController@logout');
+    Route::group(['middleware' => 'auth:admin'], function() {
 
-    Route::get('/users', 'UsersController@index')->name('users.index');
+        Route::post('/logout',  'Auth\LoginController@logout');
 
-    Route::delete('/users/delete/{id}', 'UsersController@delete')->name('users.destroy');
+        Route::get('/users', 'UsersController@index')->name('users.index');
 
-    Route::get('/home', 'HomeController@index')->name('admin.home');
+        Route::delete('/users/delete/{id}', 'UsersController@delete')->name('users.destroy');
 
-    Route::resource('/admins', 'AdminUsersController');
+        Route::get('/home', 'HomeController@index')->name('admin.home');
 
-    Route::resource('/admins', 'AdminUsersController');
+        Route::resource('/admins', 'AdminUsersController');
 
-    Route::resource('/role', 'RoleController');
+        Route::resource('/admins', 'AdminUsersController');
 
-    Route::resource('/permission', 'PermissionController');
+        Route::resource('/role', 'RoleController');
+
+        Route::resource('/permission', 'PermissionController');
+
+        Route::resource('/category', 'CategoryController');
+
+        Route::resource('/product', 'ProductController');
 
 
+    });
 });

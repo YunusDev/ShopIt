@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Umaiza</title>
+    <title>@yield('title')</title>
 
     <!-- Styles -->
 {{--    <link href="{{asset('css/app.css')}}" rel="stylesheet">--}}
@@ -25,6 +25,7 @@
 
     <style>
         nav{
+
             /*margin: 30px 50px 100px;*/
             box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
             border: 1px solid #ebebeb;
@@ -36,12 +37,12 @@
 </head>
 <body>
 <div id="app">
-    <nav class="topbar topbar-expand-md">
+    <nav class="topbar topbar-expand-md" style="position: fixed;  top: 0; width: 100%; overflow: hidden; background-color: white">
         <div class="container">
 
             <div class="topbar-left">
                 <button class="topbar-toggler">☰</button>
-                <a class="topbar-brand" href="{{url('/')}}"><h3>Umaiza</h3>
+                <a class="topbar-brand" href="{{url('/')}}"><h3>Shop</h3>
                     {{--<img class="logo-default" src="assets/img/q_a.png" alt="logo">--}}
                     <img class="logo-inverse" src="assets/img/logo-light.png" alt="logo">
                 </a>
@@ -55,7 +56,7 @@
 
                 </ul>
                 <ul class="topbar-nav nav">
-                    <li class="nav-item"><a style="padding-left: 20px;"class="nav-link" href="{{url('/plan')}}">Plan</a></li>
+                    <li class="nav-item"><a style="padding-left: 20px;"class="nav-link" href="{{url('/cart')}}">Cart</a></li>
 
                 </ul>
 

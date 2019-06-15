@@ -16,24 +16,19 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-// Vue.component('plans', require('./components/InvestmentProduct.vue'));
-Vue.component('step-form', require('./components/StepForm.vue'));
+
+Vue.component('add-to-cart', require('./components/AddToCart.vue'));
+Vue.component('cart', require('./components/Cart.vue'));
+Vue.component('order-step', require('./components/OrderStepForm.vue'));
 Vue.component('pay', require('./components/Pay.vue'));
 
+Vue.component('categories', require('./components/Admin/Categories.vue'));
+Vue.component('create-category', require('./components/Admin/CreateCategory.vue'));
 
-Vue.component('merchants', require('./components/Admin/Merchants.vue'));
-Vue.component('create-merchant', require('./components/Admin/CreateMerchant.vue'));
+Vue.component('products', require('./components/Admin/Products.vue'));
+Vue.component('create-product', require('./components/Admin/CreateProduct.vue'));
 
-Vue.component('investment-products', require('./components/Admin/InvestmentProduct.vue'));
-Vue.component('create-investment-product', require('./components/Admin/StoreInvestmentProduct.vue'));
 
-Vue.component('savings-step', require('./components/SavingsStepForm.vue'));
-Vue.component('activate-savings', require('./components/Activate.vue'));
-Vue.component('auto-savings', require('./components/AutoSavings.vue'));
-Vue.component('manual-savings', require('./components/ManualSavings.vue'));
-Vue.component('savings-payments', require('./components/SavingsPayments.vue'));
-Vue.component('savings-payments-auto', require('./components/SavingsPaymentsAuto.vue'));
-Vue.component('test', require('./components/Test.vue'));
 
 const app = new Vue({
     el: '#app'

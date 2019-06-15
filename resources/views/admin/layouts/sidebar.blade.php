@@ -34,10 +34,19 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview menu-open">
-                    <a href="" class="nav-link">
+                    <a href="{{route('category.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-safari"></i>
                         <p>
-                            Merchants
+                            Categories
+                            {{--<i class="right fa fa-angle-left"></i>--}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview menu-open">
+                    <a href="{{route('product.index')}}" class="nav-link">
+                        <i class="nav-icon fa fa-safari"></i>
+                        <p>
+                            Products
                             {{--<i class="right fa fa-angle-left"></i>--}}
                         </p>
                     </a>
