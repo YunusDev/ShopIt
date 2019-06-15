@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Admin\Admin;
-use App\MOdel\User\Category;
-use App\MOdel\User\Product;
+use App\Model\User\Category;
+use App\Model\User\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
