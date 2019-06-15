@@ -2,13 +2,15 @@
 
 namespace App\Model\User;
 
-//use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     //
 
      protected $appends = [];
+
+    protected $guarded = [];
 
     public function category(){
 
