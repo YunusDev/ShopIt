@@ -14,6 +14,6 @@ class AdminSeederTable extends Seeder
     {
         //
         DB::table('users')->delete();
-        factory(\App\Model\Admin\Admin::class,  1)->create()
+        factory(\App\Model\Admin\Admin::class,  1)->create();
     }
 }

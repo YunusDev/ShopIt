@@ -13,22 +13,14 @@ class UserSeederTable extends Seeder
     public function run()
     {
         //
-        \DB::table('photos')->delete();
         \DB::table('admins')->delete();
-
-        DB::table('photos')->insert([
-            'path' => '1531223048user5-128x128.jpg', 
-        ]);
-
-        DB::table('photos')->insert([
-            'path' => '1531223232user7-128x128.jpg', 
-        ]);
+        
 
         DB::table('admins')->insert([
             'name' => 'Adebayo',
             'email' => 'ade@gmail.com',
             'status' => 1,
-            'photo_id' => 1,
+            'photo' => '1529932498avatar.png',
             'phone' => 7084940333,
             'remember_token' => str_random(10),
             'password' => bcrypt('ade123'),
@@ -42,7 +34,7 @@ class UserSeederTable extends Seeder
         'email' => 'admin@gmail.com',
         'status' => 1,
         'phone' => 90345678,
-        'photo_id' => 2,
+        'photo' => '1529932498avatar.png',
         'password' => bcrypt('admin123'),
         'remember_token' => str_random(10),
         'created_at' => Carbon::parse(now())->format('Y.m.d'),
