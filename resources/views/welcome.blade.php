@@ -15,6 +15,8 @@
 @section('content')
 
     <!-- Header -->
+
+
     <header class="header header-inverse bg-fixed" style="background-image: url(user/assets/img/bg-gift.jpg)" data-overlay="8">
         <div class="container text-center">
 

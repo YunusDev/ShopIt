@@ -37,7 +37,7 @@ class ProductController extends Controller
 
         $carts = json_encode($carts);
 
-        return view('user.shop.cart', compact('product', 'carts'));
+        return view('user.shop.cart', compact( 'carts'));
 
     }
 
