@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AdminSeederTable extends Seeder
 {
@@ -12,7 +13,7 @@ class AdminSeederTable extends Seeder
     public function run()
     {
         //
-        \DB::table('users')->delete();
+        DB::table('users')->delete();
         factory(\App\Model\Admin\Admin::class,  1)->create()
     }
 }
