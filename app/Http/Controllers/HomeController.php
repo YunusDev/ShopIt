@@ -35,7 +35,8 @@ class HomeController extends Controller
 
     public function test(){
 
-        $carts = Cart::content();
+//        $carts = Cart::content();
+        Cart::destroy();
 //        $carts = Cart::remove('eef12573176125ce53e333e13d747a17');
 
 //        $arr = [];
@@ -46,6 +47,6 @@ class HomeController extends Controller
 //
 //        }
 
-        return $carts;
+//        return $carts;
     }
 }
