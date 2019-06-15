@@ -44,7 +44,7 @@
     <section class="section">
         <div class="container">
 
-            <cart raw_carts = "{{ $carts}}" refd="{{ Paystack::genTranxRef() }}"  keyd = "{{ config('paystack.publicKey') }}"></cart>
+            <cart raw_carts = "{{ $carts}}" refd="hhjhhjhh"  keyd = "jewhkwejjwej"></cart>
 
         </div>
     </section>
