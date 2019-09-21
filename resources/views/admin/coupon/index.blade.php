@@ -19,10 +19,9 @@
 
                     <div class="card-body">
 
-                        <products  raw_admins = "{{$admins}}" raw_categories = "{{$categories}}" raw_products = "{{$products}}"></products>
+                        <coupons  raw_coupons = "{{$coupons}}"></coupons>
 
                     </div>
-
                 </div>
 
             </div>

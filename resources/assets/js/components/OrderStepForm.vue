@@ -21,11 +21,21 @@
 
                         <div class="flexbox" v-for="cart in carts">
                             <div>
-                                <p><strong>{{cart.name}}</strong></p>
+                                <p><strong>{{cart.name}}</strong> ({{cart.qty}})</p>
                             </div>
 
                             <div>
-                                <p class="fw-600">N{{cart.price  * cart.qty}}</p>
+                                <p class="fw-600">N{{cart.price  * cart.qty | formatMon}}</p>
+                            </div>
+                        </div>
+                        <div class="flexbox" v-if="Object.keys(coupon).length > 1">
+                            <div>
+                                <p class="text-success"><strong>Coupon:</strong></p>
+                            </div>
+
+                            <div>
+                                <p  class="fw-600 text-success" v-if="coupon.message.type === 'price'">N{{coupon.message.discount | formatMon}} off</p>
+                                <p class="fw-600 text-success" v-else>{{coupon.message.discount}}% off</p>
                             </div>
                         </div>
 
@@ -35,7 +45,7 @@
                             </div>
 
                             <div>
-                                <p class="fw-600">N1000</p>
+                                <p class="fw-600">N1,000</p>
                             </div>
                         </div>
 
@@ -47,7 +57,7 @@
                             </div>
 
                             <div>
-                                <p class="fw-600">N{{totalFee}}</p>
+                                <p class="fw-600">N{{totalFee | formatMon}}</p>
                             </div>
                         </div>
                      </div>
@@ -76,6 +86,8 @@
                         <input class="form-control" v-model="order.email" type="email" placeholder="Email Address">
                     </div>
 
+                    <input type="hidden" v-model="coupon.total_price">
+
                     <div class="col-12 col-md-6 form-group">
                         <input class="form-control" v-model="order.address" type="text" placeholder="Address">
                     </div>
@@ -101,21 +113,26 @@
                 <div>
                     <div class="form-group col-lg-8" style="margin: 10px auto">
 
-                            <header class="section-header">
+                            <header class="section-header" style="margin-buttom: 0">
                                 <small>Faq</small>
                                 <h2>Method of Payment:</h2>
                                 <hr>
                                 <p class="lead">Drop us an email if you couldn't find an answer to your question in the following list.</p>
                             </header>
 
-                            <div class="form-group">
-                                <label class="big_label">Pay on Delivery</label>
-                                <input type="radio" v-model="payment_type" name="payment_type" value="pay_on_delivery" class="flat-red" >
-                            </div>
-                            <div class="form-group">
-                                <label class="big_label" for="">Make Online Payment</label>
-                                <input type="radio" v-model="payment_type" name="payment_type" value="online_payment" class="flat-red">
-                            </div>
+
+                            <label class="custom-control custom-radio">
+                                <input v-model="order.paylater" :value="'Yes'" type="radio" class="custom-control-input" name="radio1">
+                                <span class="custom-control-indicator"></span>
+                                <span style="font-size: 16px" class="custom-control-description">Pay on Delivery</span>
+                            </label>
+                            <hr>
+                            <label class="custom-control custom-radio">
+                                <input v-model="order.paylater" :value="'No'" type="radio" class="custom-control-input" name="radio1">
+                                <span class="custom-control-indicator"></span>
+                                <span style="font-size: 16px" class="custom-control-description">Pay Online with Card Now...</span>
+                            </label>
+
                     </div>
 
                     <div v-if="isPayingOnDelivery">
@@ -137,7 +154,7 @@
 
         </form-wizard>
 
-        <pay :amount = "amount" :refd = "refd" :keyd = "keyd" ></pay>
+        <pay :amount = "totalFee"  :keyd = "keyd" :coupon = "coupon" :order = "order" ></pay>
 
     </div>
 
@@ -149,13 +166,15 @@
 
         constructor(order){
 
-            this.name = order.name || '';
-            this.number = order.number || '';
-            this.email = order.email || '';
-            this.phone = order.phone || '';
+            this.name = order.name || 'Ade';
+            // this.total_price = this.total_price;
+            this.email = order.email || 'ade@gmail.com';
+            this.phone = order.phone || 2333455;
             this.local_govt = order.local_govt || '';
             this.state = order.state || '';
+            this.address = order.address || '';
             this.comment = order.comment || '';
+            this.paylater = order.paylater || 'Yes';
         }
 
     }
@@ -166,10 +185,11 @@
     // Vue.use(VueFormWizard)
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
     import Axios from 'axios'
+    import Swal from 'sweetalert'
 
     export default {
 
-        props: ['totalFee', 'carts', 'refd', 'keyd'],
+        props: ['totalFee', 'carts', 'keyd', 'coupon'],
 
         data(){
 
@@ -177,7 +197,7 @@
 
                 order: new Order({}),
                 payment_type: '',
-                amount:  this.totalFee
+                // total_price:  this.totalFee
 
             }
         },
@@ -186,7 +206,7 @@
 
             isPayingOnDelivery(){
 
-                return this.payment_type === 'pay_on_delivery';
+                return this.paylater === 'Yes';
             },
 
         },
@@ -207,11 +227,29 @@
 
             onComplete(){
 
-                if (!this.isPayingOnDelivery){
+                if (this.order.paylater === 'Yes'){
+
+                    Axios.post('/order', {order: this.order, total_price: this.totalFee, coupon: this.coupon}).then(res => {
+
+                        console.log(res);
+                        Swal('Order Initiated successfully...').then(()=>{
+
+                            window.location = '/';
+
+                        })
+
+                    }).catch(err => {
+
+                        console.log(err.response);
+
+                    })
+
+                } else{
 
                     this.$emit('pay-plan');
 
                 }
+
 
             }
 

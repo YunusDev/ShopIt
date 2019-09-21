@@ -159,6 +159,7 @@
 
                 }).catch(err => {
 
+
                     if (err.response && err.response.status == 422) {
                         const errors = err.response.data.errors;
 

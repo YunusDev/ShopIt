@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title') MiniPort - Start SHopping Now @endsection
+@section('title') MiniPort - Start Shopping Now @endsection
 
 @section('styles')
 
@@ -31,6 +31,10 @@
 
         </div>
     </header>
+
+    {{--<h4>{{$time}}</h4>--}}
+    {{--<h4>{{$time1}}</h4>--}}
+    {{--<h3>{{$timestamp}}</h3>--}}
     <!-- END Header -->
 
     <section class="section">

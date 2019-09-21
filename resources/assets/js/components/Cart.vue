@@ -1,84 +1,113 @@
 <template>
+
     <div>
+        <header v-if="!(carts.length > 0)" class="section-header" style="margin-top: -50px">
+            <small>CART</small>
+            <p class="lead">No items in cart. Go to <a href="/">shop</a></p>
+        </header>
 
-        <div class="row gap-y">
-            <div class="col-12 col-lg-8">
+        <div v-else>
 
-                <table class="table table-cart">
-                    <tbody valign="middle" v-for="cart, key in carts">
+            <div class="row gap-y">
 
-                    <tr>
-                        <td>
-                            <a class="item-remove" title="Remove Product" @click="removeItemCart(cart.rowId, key)"><i class="ti-close"></i></a>
-                        </td>
+                <div class="col-12 col-lg-8">
 
-                        <td>
-                            <a href="shop-single.html">
-                                <img src="assets/img/product-1.png" alt="...">
-                            </a>
-                        </td>
+                    <form class="col-lg-6 form-round mb-2" style="margin: 0 auto">
+                        <div class="input-group" >
+                            <input type="text" v-model="coupon_code" class=" form-control" placeholder="Apply Coupon...">
+                            <span class="input-group-btn">
+                                <button  @click="applyCoupon()" class="btn btn-primary" type="button">Apply!</button>
+                            </span>
+                        </div>
+                        <div class="invalid-feedback" v-if="!validCoupon" >{{coupon_error}}</div>
 
-                        <td>
-                            <h5>{{cart.name}}</h5>
-                            <p>Superior Sports Watch</p>
-                        </td>
+                    </form>
 
-                        <td>
-                            <label>Quantity</label>
-                            <input class="form-control form-control-sm" type="text" placeholder="Quantity" :value="cart.qty">
-                        </td>
+                    <div style="overflow-x:auto;">
+                        <table class="table table-cart" style="">
+                            <tbody valign="middle" v-for="cart, key in carts">
+                                <tr>
+                                    <td>
+                                        <a class="item-remove" title="Remove Product" @click="removeItemCart(cart.rowId, key)"><i class="ti-close"></i></a>
+                                    </td>
 
-                        <td>
-                            <h4 class="price">N{{cart.price * cart.qty}}</h4>
-                        </td>
-                    </tr>
+                                    <td>
+                                        <a href="shop-single.html">
+                                            <img src="assets/img/product-1.png" alt="...">
+                                        </a>
+                                    </td>
 
-                    </tbody>
-                </table>
+                                    <td>
+                                        <h5>{{cart.name}}</h5>
+                                        <small>(N{{cart.price | formatMon}})</small>
+                                    </td>
 
-            </div>
+                                    <td>
+                                        <label>Quantity</label>
+                                        <select  @change="editItemCart(cart.rowId, cart.qty)"   class="form-control" v-model="cart.qty">
+                                            <option  v-for="index in 10" :key="index" >{{index}}</option>
+                                        </select>
+                                        <!--<input class="form-control form-control-sm" type="text" placeholder="Quantity" :value="cart.qty">-->
+                                    </td>
 
+                                    <td>
+                                        <h4 class="price">N{{cart.price * cart.qty | formatMon}}</h4>
+                                    </td>
+                                </tr>
 
-            <div class="col-12 col-lg-4">
-                <div class="cart-price">
-                    <div class="flexbox">
-                        <div>
-                            <p><strong>Subtotal:</strong></p>
-                            <p><strong>Delivery Fee:</strong></p>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="cart-price">
+                        <div class="flexbox">
+                            <div>
+                                <p><strong>Subtotal:</strong></p>
+                                <div v-if="Object.keys(coupon).length > 1">
+                                    <p class="text-success" v-if=" coupon.valid === 'Yes'"><strong>Coupon:</strong></p>
+                                </div>
+                                <p><strong>Delivery Fee:</strong></p>
+                            </div>
+
+                            <div>
+                                <p style="font-weight: bolder" class="text-bold">N{{getSubTotal | formatMoney}}</p>
+                                <div style="font-weight: bolder" v-if="Object.keys(coupon).length > 1">
+                                    <p class="text-success " v-if="coupon.message.type === 'price'">N{{coupon.message.discount | formatMon}} off</p>
+                                    <p class="text-success" v-else>{{coupon.message.discount}}% off</p>
+                                </div>
+                                <p style="font-weight: bolder">N{{shipping_fee | formatMoney}}</p>
+                            </div>
                         </div>
 
-                        <div>
-                            <p>N{{getSubTotal}}</p>
-                            <p>N{{shipping_fee}}</p>
+                        <hr>
+
+                        <div class="flexbox">
+                            <div>
+                                <p><strong>Total:</strong></p>
+                            </div>
+
+                            <div>
+                                <p class="fw-600">N{{totalFee | formatMoney}}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <hr>
-
                     <div class="flexbox">
-                        <div>
-                            <p><strong>Total:</strong></p>
-                        </div>
-
-                        <div>
-                            <p class="fw-600">N{{totalFee}}</p>
-                        </div>
+                        <a class="btn btn-secondary" href="/"><i class="ti-angle-left fs-9"></i> Revise</a>
+                        <button class="btn btn-primary"  type="submit">Checkout <i class="ti-angle-right fs-9"></i></button>
                     </div>
                 </div>
 
-                <div class="flexbox">
-                    <a class="btn btn-secondary" href="/"><i class="ti-angle-left fs-9"></i> Revise</a>
-                    <button class="btn btn-primary" type="submit">Checkout <i class="ti-angle-right fs-9"></i></button>
-                </div>
+
             </div>
 
+            <order-step  :totalFee = totalFee :carts = carts :keyd = "keyd" :coupon="coupon" ></order-step>
 
         </div>
-
-        <order-step  :totalFee = totalFee :carts = carts :refd = "refd" :keyd = "keyd" ></order-step>
-
     </div>
-
 
 </template>
 
@@ -88,7 +117,7 @@
     import Swal from 'sweetalert'
 
     export default {
-        props: ['raw_carts', 'refd', 'keyd'],
+        props: ['raw_carts', 'keyd', 'auth'],
 
         mounted(){
 
@@ -105,7 +134,11 @@
                 // obj_carts: JSON.parse(this.raw_carts),
                 subtotal: this.getSubTotal,
                 sub: 0,
-                shipping_fee: 1000
+                coupon: '',
+                shipping_fee: 1000,
+                coupon_code: '',
+                coupon_error: '',
+                validCoupon: false
             }
         },
 
@@ -113,7 +146,14 @@
 
             totalFee(){
 
-                return this.getSubTotal + this.shipping_fee;
+
+                if (this.validCoupon){
+
+                    return Math.ceil(((this.getSubTotal - this.getCouponDiscount ) + this.shipping_fee) / 100) * 100;
+
+                }
+
+                return Math.ceil((this.getSubTotal + this.shipping_fee) / 100) * 100;
 
             },
 
@@ -121,6 +161,7 @@
             getSubTotal(){
 
                 // subtotal = 0;
+                this.sub = 0;
 
                 this.carts.forEach(cart => {
 
@@ -130,23 +171,75 @@
 
                 return this.sub;
 
+            },
+
+            getCouponDiscount(){
+
+
+                if (this.coupon.message.type === 'price'){
+
+                    return this.coupon.message.discount;
+
+                }else{
+
+                    return (this.coupon.message.discount / 100) * this.getSubTotal;
+                }
+
+
             }
 
         },
 
         methods: {
 
-            editItemCart(id) {
+            applyCoupon(){
+
+                if (this.auth === '1'){
+
+                    Axios.post('/apply/coupon', {coupon_code: this.coupon_code}).then(res => {
+
+                        console.log(res);
+                        if (res.data.valid === 'No'){
+
+                            this.coupon_error = res.data.message;
+
+                        }else {
+
+                            this.coupon = res.data;
+                            this.validCoupon = true;
+                            Swal('Coupon Added Successfully', {
+
+                                buttons: false,
+                                timer: 1000,
+
+                            });
+                        }
+
+                    }).catch(err => {
+
+                        console.log(err.response)
+                    })
+
+                }else {
+
+                    window.location = '/login'
+                }
+
+
+
+            },
+
+            editItemCart(id, qty) {
+
 
                 Axios.post('/edit/cart', {
 
-                    quantity: this.qty,
+                    quantity: qty,
                     rowId: id,
-
 
                 }).then(res => {
 
-                    Swal('Product Edited to Cart Successfully', {
+                    Swal('Product Edited in Cart Successfully', {
 
                         buttons: false,
                         timer: 1500,
@@ -192,12 +285,26 @@
             }
 
 
+        },
 
 
-        }
     }
 </script>
 
 <style scoped>
+
+    .invalid-feedback{
+
+        margin-top: 4px;
+        color: red;
+        font-weight: bold;
+        font-size: 13px;
+        margin-left: 15px
+    }
+
+    table.table{
+
+        /*width:100%;overflow-x: scroll*/
+    }
 
 </style>

@@ -52,6 +52,16 @@
                     </a>
                 </li>
 
+                <li class="nav-item has-treeview menu-open">
+                    <a href="{{route('coupon.index')}}" class="nav-link">
+                        <i class="nav-icon fa fa-safari"></i>
+                        <p>
+                            Coupons
+                            {{--<i class="right fa fa-angle-left"></i>--}}
+                        </p>
+                    </a>
+                </li>
+
 
                 {{--<li class="nav-item">--}}
                     {{--<a href="pages/widgets.html" class="nav-link"><i class="nav-icon fa fa-book"></i><p class="pl-1"> Blog</p></a>--}}

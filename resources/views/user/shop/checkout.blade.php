@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title') Cart @endsection
+@section('title') Checkout @endsection
 
 @section('styles')
 
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
 
-                    <h1>Cart</h1>
+                    <h1>Checkout</h1>
                     <p class="fs-20 opacity-70">You can find a list of our product in this page. We'll deliver your order in less than two days. Try it yourself!</p>
 
                 </div>
@@ -34,17 +34,10 @@
     </header>
     <!-- END Header -->
 
-
-
-    <!--
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      | Products
-      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-      !-->
     <section class="section">
         <div class="container">
 
-            <cart raw_carts = "{{ $carts}}" auth="{{auth()->check()}}" refd="hhjhhjhh"  keyd = "jewhkwejjwej"></cart>
+            <order-step   raw_carts = "{{$carts}}" refd="hhjhhjhh"  keyd = "jewhkwejjwej" ></order-step>
 
         </div>
     </section>
@@ -56,7 +49,6 @@
 
     <!-- iCheck 1.0.1 -->
     <script src="{{asset('admin/plugins/iCheck/icheck.min.js')}}"></script>
-    <script src="https://js.paystack.co/v1/inline.js"></script>
 
     <script>
         //Flat red color scheme for iCheck

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Model\User\Coupon;
+use App\Model\User\Profile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +29,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function coupons(){
+
+        return $this->belongsToMany(Coupon::class, 'coupon_user')->withTimestamps()->orderBy('created_at', 'DESC');
+
+    }
+
+    public function profile(){
+
+        return $this->hasOne(Profile::class);
+
+    }
 
 
 }

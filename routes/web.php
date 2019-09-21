@@ -7,7 +7,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/test', 'HomeController@test');
 
+
 Route::group(['namespace'=>'User'], function() {
+
 
     Route::get('/product/{slug}', 'ProductController@show')->name('single');
 
@@ -18,6 +20,19 @@ Route::group(['namespace'=>'User'], function() {
     Route::post('/edit/cart', 'ProductController@updateItemCart')->name('editToCart');
 
     Route::post('/remove/product/cart', 'ProductController@deleteItemCart')->name('remToCart');
+
+    Route::post('/apply/coupon', 'CouponController@applyCoupon');
+
+    Route::post('/order', 'OrderController@store');
+
+    Route::get('/checkout', 'CheckoutController@index')->name('checkout');
+
+    Route::get('/time', 'CouponController@time');
+
+    Route::get('/check', 'CouponController@check');
+
+    Route::get('/create', 'CouponController@store');
+
 
 });
 
@@ -48,6 +63,8 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function() {
         Route::resource('/category', 'CategoryController');
 
         Route::resource('/product', 'ProductController');
+
+        Route::resource('/coupon', 'CouponController');
 
 
     });
