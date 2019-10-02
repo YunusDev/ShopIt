@@ -23,7 +23,10 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->boolean('status')->default(true);
             $table->integer('quantity');
+            $table->longText('specs');
+            $table->longText('brief');
             $table->longText('description');
+
             $table->timestamps();
         });
     }

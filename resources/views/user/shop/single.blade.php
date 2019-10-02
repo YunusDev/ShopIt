@@ -64,13 +64,14 @@
                         <span class="lead ml-20">N{{$product->price}}</span>
                     </p>
 
-                    <p>Built-in GPS. Water resistance to 50 meters.1 A lightning-fast dual‑core processor. And a display that’s two times brighter than before. Full of features that help you stay active.</p>
+                    <p>{{$product->brief}}</p>
 
                     <ul>
-                        <li>Built in GPS</li>
-                        <li>Heart Rate Sensor</li>
-                        <li>Water Resistant 50 Meters</li>
-                        <li>Comprehensive Workout App</li>
+                        @foreach($product_specs as $spec)
+
+                            <li>{{$spec}}</li>
+
+                        @endforeach
                     </ul>
 
                     <hr>
@@ -109,16 +110,8 @@
 
             <div class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
-                    <h5>Full specification</h5>
 
-                    <p>Interactively foster interoperable schemas rather than client-centric architectures. Progressively drive collaborative human capital vis-a-vis optimal ideas. Monotonectally fashion cross-platform leadership skills through high standards in manufactured products. Continually reintermediate.</p>
-                    <p>Progressively deliver ethical schemas before equity invested intellectual capital. Rapidiously embrace value-added manufactured products rather than 24/7 information. Credibly whiteboard compelling methodologies installed base action items. Objectively maintain.</p>
-
-                    <h6>Warranty</h6>
-                    <p>Synergistically empower multimedia based scenarios before backward-compatible testing procedures. Interactively disintermediate distinctive portals with state of the art sources. Conveniently architect process-centric quality vectors for cross-platform models. Continually expedite.</p>
-
-                    <h6>Shipping info</h6>
-                    <p>Progressively morph plug-and-play value without market positioning partnerships. Authoritatively myocardinate high standards in deliverables and effective opportunities. Interactively whiteboard premium relationships rather than go forward expertise. Phosfluorescently target process-centric.</p>
+                    {!! $product->description !!}
 
                 </div>
             </div>

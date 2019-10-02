@@ -17,7 +17,9 @@ class ProductController extends Controller
 
         $product = Product::with('category')->where('slug', $slug)->first();
 
-        return view('user.shop.single', compact('product'));
+        $product_specs = explode (",", $product->specs);
+
+        return view('user.shop.single', compact('product', 'product_specs'));
 
     }
 

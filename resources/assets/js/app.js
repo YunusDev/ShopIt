@@ -9,6 +9,19 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueInstantSearch from 'vue-instantsearch';
+Vue.use(VueInstantSearch);
+
+Vue.filter('readMore', function (text, length, suffix) {
+
+    if (text.length < length){
+
+        return text;
+    }
+
+    return text.substring(0, length) + suffix;
+});
+
 Vue.filter('formatMon', function (amount, decimalCount = 0, decimal = ".", thousands = ",") {
 
     decimalCount = Math.abs(decimalCount);
@@ -55,6 +68,9 @@ Vue.component('create-product', require('./components/Admin/CreateProduct.vue'))
 
 Vue.component('coupons', require('./components/Admin/Coupons.vue'));
 Vue.component('create-coupon', require('./components/Admin/CreateCoupon.vue'));
+
+
+Vue.component('my-search', require('./components/MySearch.vue'));
 
 const app = new Vue({
     el: '#app'

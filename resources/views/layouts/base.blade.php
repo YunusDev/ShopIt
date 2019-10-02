@@ -97,7 +97,8 @@
         <div class="container">
             <div class="row gap-y">
                 <div class="col-12 col-md-6">
-                    <p class="text-center text-md-left">Copyright © 2017 <a class="text-dark" href="/">Umaiza</a>. All rights reserved.</p>
+                    <p class="text-center text-md-left">Copyright © 2017 <a class="text-dark" href="/">Shop</a>. All rights reserved.</p>
+                    <ais-powered-by/>
                 </div>
 
                 <div class="col-12 col-md-6">
@@ -120,9 +121,9 @@
 </div>
 {{--<script src="{{asset('admin/plugins/jquery/jquery.min.js')}}"></script>--}}
 
-<script src="/assets/js/core.min.js"></script>
-<script src="/assets/js/thesaas.min.js"></script>
-<script src="/assets/js/script.js"></script>
+<script src="{{asset('assets/js/core.min.js')}}"></script>
+<script src="{{asset('assets/js/thesaas.min.js')}}"></script>
+<script src="{{asset('assets/js/script.js')}}"></script>
 
 <script src="/js/app.js"></script>
 <script src="{{asset('admin/plugins/jquery/jquery.min.js')}}"></script>

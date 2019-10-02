@@ -32,45 +32,54 @@
         </div>
     </header>
 
-    {{--<h4>{{$time}}</h4>--}}
-    {{--<h4>{{$time1}}</h4>--}}
-    {{--<h3>{{$timestamp}}</h3>--}}
-    <!-- END Header -->
-
     <section class="section">
         <div class="container">
 
+            <h1 class="text-center" style="margin-top: -50px">Shop</h1>
+
+            {{--<form class="form-round py-30 col-lg-6" style="margin: 0 auto">--}}
+                {{--<div class="input-group row">--}}
+                    {{--<input type="text" class="form-control form-control-lg" placeholder="Search for...">--}}
+                    {{--<span class="input-group-btn">--}}
+                     {{--<button class="btn btn-primary" type="button">Go!</button>--}}
+                {{--</span>--}}
+                {{--</div>--}}
+            {{--</form>--}}
+
+            <my-search> </my-search>
+
+
+
             <div class="row gap-y">
 
+                {{--@forelse($products as $product)--}}
 
-                @forelse($products as $product)
+                    {{--<div class="col-12 col-md-6 col-xl-4">--}}
 
-                    <div class="col-12 col-md-6 col-xl-4">
+                        {{--<div class="shop-item" >--}}
+                            {{--<div class="item-details">--}}
+                                {{--<div>--}}
+                                    {{--<h5>{{$product->name}}</h5>--}}
+                                    {{--<p>{{$product->category->name}}</p>--}}
+                                {{--</div>--}}
 
-                        <div class="shop-item" >
-                            <div class="item-details">
-                                <div>
-                                    <h5>{{$product->name}}</h5>
-                                    <p>{{$product->category->name}}</p>
-                                </div>
+                                {{--<div class="item-price"><span class="unit">N</span>{{$product->price}}</div>--}}
+                            {{--</div>--}}
+                            {{--<a href="{{route('single', $product->slug)}}">--}}
+                                {{--<img height="400" src="/productCoverImages/{{$product->image}}" alt="product">--}}
+                            {{--</a>--}}
 
-                                <div class="item-price"><span class="unit">N</span>{{$product->price}}</div>
-                            </div>
-                            <a href="{{route('single', $product->slug)}}">
-                                <img src="assets/img/product-1.png" alt="product">
-                            </a>
+                            {{--<add-to-cart product_id = "{{$product->id}}"></add-to-cart>--}}
 
-                            <add-to-cart product_id = "{{$product->id}}"></add-to-cart>
+                        {{--</div>--}}
 
-                        </div>
+                    {{--</div>--}}
 
-                    </div>
+                {{--@empty--}}
 
-                @empty
+                    {{--<h5>No Products In Store</h5>--}}
 
-                    <h5>No Products In Store</h5>
-
-                @endforelse
+                {{--@endforelse--}}
 
             </div>
 
