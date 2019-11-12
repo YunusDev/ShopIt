@@ -76,7 +76,7 @@
 
                     <hr>
 
-                    <form>
+                    {{--<form>--}}
                         <div class="form-group">
                             <select class="form-control">
                                 <option>Select a color</option>
@@ -87,17 +87,19 @@
                             </select>
                         </div>
 
-                        <div class="row" style="margin-top: 15px">
-                            <div class="col  form-group">
-                                <input class="form-control" type="text" placeholder="Quantity">
-                            </div>
+                        <add-to-cart product_id = "{{$product->id}}"></add-to-cart>
 
-                            <div class="col form-group">
-                                <button class="btn btn-block btn-primary" ><span class="fa fa-shopping-cart"></span> Add to cart</button>
-                            </div>
-                        </div>
+                        {{--<div class="row" style="margin-top: 15px">--}}
+                            {{--<div class="col  form-group">--}}
+                                {{--<input class="form-control" type="text" placeholder="Quantity">--}}
+                            {{--</div>--}}
+                        {{----}}
+                            {{--<div class="col form-group">--}}
+                                {{--<button class="btn btn-block btn-primary" ><span class="fa fa-shopping-cart"></span> Add to cart</button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                    </form>
+                    {{--</form>--}}
 
                 </div>
             </div>
@@ -114,6 +116,18 @@
                     {!! $product->description !!}
 
                 </div>
+            </div>
+
+            <hr>
+
+            <h2 class="text-center">Review</h2>
+
+            <div class="form-group">
+                <textarea class="form-control" name="" placeholder="Your Review!!!" id="" cols="30" rows="5"></textarea>
+            </div>
+
+            <div class="col form-group">
+                <button class="btn  btn-primary" ><span class="fa fa-star-o"></span> Add Review</button>
             </div>
 
         </div>

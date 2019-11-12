@@ -52,34 +52,34 @@
 
             <div class="row gap-y">
 
-                {{--@forelse($products as $product)--}}
+                @forelse($products as $product)
 
-                    {{--<div class="col-12 col-md-6 col-xl-4">--}}
+                    <div class="col-12 col-md-6 col-xl-4">
 
-                        {{--<div class="shop-item" >--}}
-                            {{--<div class="item-details">--}}
-                                {{--<div>--}}
-                                    {{--<h5>{{$product->name}}</h5>--}}
-                                    {{--<p>{{$product->category->name}}</p>--}}
-                                {{--</div>--}}
+                        <div class="shop-item" >
+                            <div class="item-details">
+                                <div>
+                                    <h5>{{$product->name}}</h5>
+                                    <p>{{$product->category->name}}</p>
+                                </div>
 
-                                {{--<div class="item-price"><span class="unit">N</span>{{$product->price}}</div>--}}
-                            {{--</div>--}}
-                            {{--<a href="{{route('single', $product->slug)}}">--}}
-                                {{--<img height="400" src="/productCoverImages/{{$product->image}}" alt="product">--}}
-                            {{--</a>--}}
+                                <div class="item-price"><span class="unit">N</span>{{$product->price}}</div>
+                            </div>
+                            <a href="{{route('single', $product->slug)}}">
+                                <img height="400" src="/productCoverImages/{{$product->image}}" alt="product">
+                            </a>
 
-                            {{--<add-to-cart product_id = "{{$product->id}}"></add-to-cart>--}}
+                            <add-to-cart product_id = "{{$product->id}}"></add-to-cart>
 
-                        {{--</div>--}}
+                        </div>
 
-                    {{--</div>--}}
+                    </div>
 
-                {{--@empty--}}
+                @empty
 
-                    {{--<h5>No Products In Store</h5>--}}
+                    <h5>No Products In Store</h5>
 
-                {{--@endforelse--}}
+                @endforelse
 
             </div>
 
